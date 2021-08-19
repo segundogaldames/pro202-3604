@@ -1,0 +1,34 @@
+Escuela - Carrera
+Escuela(cod_escuela, nombre, director)
+Carrera(cod_carrera, nombre, jefe, cod_escuela);
+
+Carrera - Matricula - Estudiante
+Carrera(cod_carrera, nombre, jefe, cod_escuela)
+Estudiante(rut, nombre, fecha_nacimiento)
+Matricula(cod_matricula, fecha,cod_carrera,rut);
+
+Estudiante - Profesor - Asignatura - Clase
+Estudiante(rut, nombre, fecha_nacimiento)
+Profesor(rut, nombre, profesion)
+Asignatura(cod_asignatura, nombre)
+Clase(cod_clase, hora_inicio, hora_fin, fecha,rut_estudiante, rut_profesor, cod_asignatura);
+
+Asignatura - Modalidad
+Asignatura(cod_asignatura, nombre)
+Modalidad(cod_modalidad, nombre)
+Asignatura-Modalidad(cod,cod_asignatura,cod_modalidad);
+
+//Modos de transformacion de especializacion/generalizaciones
+a) Materializar todas las entidades que forman la especializacion/generalizacion en relaciones, en donde la entidad superclase comparta su clave primaria con las entidades subclases
+	Carrera - Tecnica - Presenciales
+	Carrera(cod_carrera, nombre, jefe, cod_escuela)
+	Tecnica(cod_tecnica, cod_carrera,responsable)
+	Profesional(cod_profesional, cod_carrera,responsable);
+
+b) Materializar cada una de las entidades subclase como relaciones independientes
+	Tecnica(cod_tecnica, nombre, cod_escuela,responsable)
+	Profesional(cod_profesional, nombre, cod_escuela,responsable);
+	
+c) Materializar una tabla superclase compuesta por los datos asociados de las entidades espcializadas y que la actual tabla generalizadora se transforme en una subclase
+	Tipo-Carrera(cod_tipo, nombre)
+	Carrera(cod_carrera, nombre, jefe, cod_escuela,cod_tipo);
