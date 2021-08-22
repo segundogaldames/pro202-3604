@@ -1,19 +1,26 @@
-Escuela - Carrera
+Modelo Logico: se usa para establecer las claves primarias y foraneas de las interrelaciones
+
+1) En una interrelacion binaria, cuya cardinalidad es 1:1 => FK, que puede ubicarse en cualquiera de las dos relaciones o entidades
+2) En una interrelacion binaria, cuya cardinalidad es 1:N => FK, que se ubica en la entidad o relacion que tenga la cardinalidad muchos
+3) En una interrelacion binaria, cuya cardinalidad es N:M => Nueva Relacion, compuesta por las claves primarias de las relaciones o entidades que la componen
+4) En las interrelaciones ternarias y n-arias se cumple la regla anterior, en donde la nueva relacion estara compuesta por las claves primarias de las entidades o relaciones que la componen.
+
+Administra: Escuela - Carrera
 Escuela(cod_escuela, nombre, director)
 Carrera(cod_carrera, nombre, jefe, cod_escuela);
 
-Carrera - Matricula - Estudiante
+Matricula: Carrera - Estudiante
 Carrera(cod_carrera, nombre, jefe, cod_escuela)
 Estudiante(rut, nombre, fecha_nacimiento)
 Matricula(cod_matricula, fecha,cod_carrera,rut);
 
-Estudiante - Profesor - Asignatura - Clase
+Clase: Estudiante - Profesor - Asignatura 
 Estudiante(rut, nombre, fecha_nacimiento)
 Profesor(rut, nombre, profesion)
 Asignatura(cod_asignatura, nombre)
 Clase(cod_clase, hora_inicio, hora_fin, fecha,rut_estudiante, rut_profesor, cod_asignatura);
 
-Asignatura - Modalidad
+Imparte: Asignatura - Modalidad
 Asignatura(cod_asignatura, nombre)
 Modalidad(cod_modalidad, nombre)
 Asignatura-Modalidad(cod,cod_asignatura,cod_modalidad);
@@ -32,3 +39,14 @@ b) Materializar cada una de las entidades subclase como relaciones independiente
 c) Materializar una tabla superclase compuesta por los datos asociados de las entidades espcializadas y que la actual tabla generalizadora se transforme en una subclase
 	Tipo-Carrera(cod_tipo, nombre)
 	Carrera(cod_carrera, nombre, jefe, cod_escuela,cod_tipo);
+	
+Carrera:
+Tipo-Carrera(cod_tipo, nombre)
+Carrera(cod_carrera, nombre, jefe, cod_escuela,cod_tipo);
+
+Modalidad:
+Tipo-Modalidad(cod_tipo, nombre),
+Modalidad(cod_modalidad, nombre,cod_tipo);	
+
+
+
